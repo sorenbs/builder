@@ -112,6 +112,11 @@ function CodeEditorController($scope, pubSub, dataBridge) {
         //codeMirrorInstance.scrollTo(errorPosition.x, errorPosition.y);
     });
 
+    pubSub.sub('Errors.clear', function(line) {
+        codeMirrorInstance.setLineClass(markedErrorLine, null);
+        markedErrorLine = 0;
+    });
+
     function initCodemirror() {
         codeArea = document.getElementById('Code');
         codeMirrorInstance = CodeMirror.fromTextArea(codeArea,
