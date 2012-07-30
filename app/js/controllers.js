@@ -188,7 +188,7 @@ function CodeEditorController($scope, pubSub, dataBridge) {
             var scriptTag = document.createElement('script');
             scriptTag.id = 'scriptEvaluator';
             scriptTag.type = 'text/javascript';
-            scriptTag.appendChild(document.createTextNode("try { (function() {\n" + script + "})()} catch (er) {\n logError(er);}"));
+            scriptTag.appendChild(document.createTextNode("try { (function() {\n" + script + "})()} catch (er) {\n angular.element('#codeContainer').scope().logError(er);}"));
 
             document.getElementById('scriptEvaluator').parentNode.replaceChild(scriptTag, document.getElementById('scriptEvaluator'));
         } catch (ex) {
@@ -212,7 +212,7 @@ function CodeEditorController($scope, pubSub, dataBridge) {
         pubSub.pub('Errors.mark', line);
     }
 
-    function logError(ex) {
+    $scope.logError = function(ex) {
         console.log('tada');
         try {
             // get line and column from chrome stack trace. Syntax: 
