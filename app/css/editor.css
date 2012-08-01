@@ -14,33 +14,17 @@
     width: 100%;
 }
 
-.codeContainer {
-    width: 50%;
-    height: 100%;
-    position: relative;
-}
 
-.gameContainer {
-    width: 50%;
-    background-color: red;
-    height: 500px;
-    position: fixed;
-    top: 40px;
-    right: 0;
-}
+
+
 
 .consoleContainer {
-    width: 50%;
-    background-color: red;
-    height: 200px;
-    position: fixed;
-    top: 540px;
-    right: 0;
+    width: 100%;
+    background-color: black;
+    -webkit-box-flex: 1;
+    overflow-y: auto;
 }
 
-    .consoleContainer .CodeMirror-scroll {
-        min-height: 200px;
-    }
 
 .resourcesContainer {
     width: 100%;
@@ -70,10 +54,36 @@
 html {
     height: 100%;
 }
-body {
-    padding-top: 40px;
-    height: 100%;
+
+#codeContainer {
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    left: 0px;
+    width: 50%;
 }
-#main {
-    height: 100%;
+
+#rightPane {
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    bottom: 0pc;
+    width: 50%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+#gameContainer {
+    
+    overflow-x: auto;
+    padding: 10px 0 10px 0;
+    background-color: black;
+    height: auto;
+    min-height: 400px;
+    
+}
+
+#cr-stage {
+    margin-left: auto;
+    margin-right: auto;
 }

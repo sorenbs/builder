@@ -67,9 +67,8 @@
 
 
 
-    <div id="main">
-        <div ng-controller="CodeEditorController" id="codeContainer" class="codeContainer">
-            <textarea id="Code">
+    <div ng-controller="CodeEditorController" id="codeContainer" class="codeContainer">
+        <textarea id="Code">
 Crafty.init(600, 400);
 Crafty.background('rgb(127,127,127)');
 
@@ -118,9 +117,12 @@ Crafty.e("LeftPaddle, DOM, 2D, Text")
 	.text("0 Points");
 			
 </textarea>
-            <!-- scriptEvaluator is used to evaluate the content of the editor -->
-            <script id="scriptEvaluator" type="text/javascript"></script>
-        </div>
+        <!-- scriptEvaluator is used to evaluate the content of the editor -->
+        <script id="scriptEvaluator" type="text/javascript"></script>
+    </div>
+    
+    <div id="rightPane">
+    
         <div id="gameContainer" class="gameContainer">
             <!-- <div id="assetsContainer" ng-controller="AssetsCtrl" class="resourcesContainer">
 				
@@ -150,7 +152,10 @@ Crafty.e("LeftPaddle, DOM, 2D, Text")
         <div ng-controller="ConsoleController" class="consoleContainer">
             <textarea id="Console">
 			</textarea>
-        </div>
+        </div>    
+
+    </div>
+    
 
 
 
@@ -251,7 +256,6 @@ Crafty.e("LeftPaddle, DOM, 2D, Text")
             }
             */
         </script>
-    </div>
 
 
 
