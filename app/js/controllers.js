@@ -118,6 +118,9 @@ function CodeEditorController($scope, pubSub, dataBridge) {
     });
 
     function initCodemirror() {
+    	CodeMirror.commands.autocomplete = function (cm) {
+    		CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
+    	};
         codeArea = document.getElementById('Code');
         codeMirrorInstance = CodeMirror.fromTextArea(codeArea,
         {
@@ -130,6 +133,7 @@ function CodeEditorController($scope, pubSub, dataBridge) {
             lineWrapping: true,
             onChange: processInput
         });
+	    processInput();
     }
 
     function processInput() {
