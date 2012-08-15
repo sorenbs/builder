@@ -2,6 +2,92 @@
 
 /* Controllers */
 
+function AssetsCtrl($scope, pubSub, host, versionManager) {
+
+	$scope.images = [
+    {
+    	"name": "Nexus S",
+    	"snippet": "Fast just got faster with Nexus S."
+    },
+    {
+    	"name": "Motorola ",
+    	"snippet": "The Next, Next Generation tablet."
+    },
+    {
+    	"name": "MOTOROLA XOOM™",
+    	"snippet": "The Next, Next Generation tablet."
+    }
+	];
+
+	pubSub.sub('Server.images', function (images) {
+		$scope.images = images;
+		$scope.$apply();
+	});
+
+
+	function addDroppedFiles(files) {
+		for (var i = 0; i < files.length; i++) {
+			var f = files[i];
+			console.log(f);
+			$scope.images.push({ name: f.name, snippet: "Cool!" });
+
+			uploadFile(f);
+
+		}
+		
+		$scope.$apply();
+		console.log(files);
+	}
+	
+	function uploadFile(file) {
+		var fd = new FormData();
+		fd.append(file.name, file);
+		
+		$.ajax({
+			type: 'POST',
+			url: host + "/api/craft/" + versionManager.getId() + "/image/" + versionManager.getVersion(),
+			data: fd,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				if (data.error) {
+					pubSub.pub('Console.log', "Problem saving: " + data.error);
+				} else {
+					pubSub.pub('Console.log', "Saved image " + data.name);
+				}
+			}
+		});
+	}
+
+	var dropbox = document.getElementById("fileDropArea");
+	dropbox.addEventListener("dragenter", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		dropbox.style.backgroundColor = "green";
+	}, false);
+	dropbox.addEventListener("dragleave", function (e) {
+		console.log(e);
+		e.stopPropagation();
+		e.preventDefault();
+		dropbox.style.backgroundColor = "gray";
+	}, false);
+	dropbox.addEventListener("dragover", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+	}, false);
+	dropbox.addEventListener("drop", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		var dt = e.dataTransfer;
+		var files = dt.files;
+		dropbox.style.backgroundColor = "lime";
+
+		
+
+		console.log((new FileReader()).readAsBinaryString(e));
+		addDroppedFiles(files);
+	}, false);
+}
 
 function MenuCtrl($scope, pubSub, dataBridge, versionManager, host) {
     $scope.versions = [];
@@ -69,6 +155,9 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host) {
                     }
                     if (data.history) {
                         pubSub.pub('Server.history', data.history);
+                    }
+                    if (data.images) {
+                    	pubSub.pub('Server.images', data.images);
                     }
                 }
             },
