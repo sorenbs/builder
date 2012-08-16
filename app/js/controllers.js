@@ -2,6 +2,16 @@
 
 /* Controllers */
 
+function RightPaneCtrl($scope, activeRightPane) {
+	$scope.displayInRightPane = function (pane) {
+		if (activeRightPane.is(pane)) {
+			return '';
+		} else {
+			return 'hidden';
+		}
+	};
+}
+
 function AssetsCtrl($scope, pubSub, host, versionManager) {
 
 	$scope.images = [
@@ -54,6 +64,7 @@ function AssetsCtrl($scope, pubSub, host, versionManager) {
 					pubSub.pub('Console.log', "Problem saving: " + data.error);
 				} else {
 					pubSub.pub('Console.log', "Saved image " + data.name);
+					$scope.images.push({ name: data.name, snippet: "Cool!" });
 				}
 			}
 		});
@@ -81,15 +92,11 @@ function AssetsCtrl($scope, pubSub, host, versionManager) {
 		var dt = e.dataTransfer;
 		var files = dt.files;
 		dropbox.style.backgroundColor = "lime";
-
-		
-
-		console.log((new FileReader()).readAsBinaryString(e));
 		addDroppedFiles(files);
 	}, false);
 }
 
-function MenuCtrl($scope, pubSub, dataBridge, versionManager, host) {
+function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightPane) {
     $scope.versions = [];
     pubSub.sub('Server.history', function (data) {
         console.log(data);
@@ -176,6 +183,18 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host) {
             dataType: 'json'
         });
     }
+
+	activeRightPane.set('game');
+	$scope.activeButtonClass = function(btn) {
+		if (activeRightPane.is(btn)) {
+			return 'active';
+		} else {
+			return '';
+		}
+	};
+	$scope.rightPane = function(btn) {
+		activeRightPane.set(btn);
+	};
 }
 //MenuCtrl.$inject = [];
 

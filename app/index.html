@@ -18,6 +18,7 @@
 				<a class="brand" href="/">CraftyBuilder</a>
 				<ul class="nav">
 					<li class="menu_item"><a ng-click="saveToServer();">Save</a> </li>
+					<li class="menu_item"><a ng-click="fork();">Fork</a> </li>
 					<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">History
 							                     <b class="caret"></b></a>
 						<ul id="history-menu" class="dropdown-menu">
@@ -34,9 +35,9 @@
 					</li>
 				</ul>
 				<div class="btn-group pull-right">
-					<button class="btn active">
+					<button ng-click="rightPane('game')" ng-class="activeButtonClass('game')" class="btn">
 						Game</button>
-					<button class="btn">
+					<button ng-click="rightPane('resources')" ng-class="activeButtonClass('resources')" class="btn">
 						Resources</button>
 				</div>
 			</div>
@@ -59,30 +60,25 @@ Crafty.e("2D, DOM, Color, Fourway")
 		<script id="scriptEvaluator" type="text/javascript"></script>
 	</div>
 	<!-- EDITOR END -->
-	<div id="rightPane">
-		<div id="assetsContainer" ng-controller="AssetsCtrl" class="resourcesContainer">
-
+	<!-- RIGHTPANE -->
+	<div id="rightPane" ng-controller="RightPaneCtrl">
+		<div ng-class="displayInRightPane('resources')" id="assetsContainer" ng-controller="AssetsCtrl" class="resourcesContainer">
 			<ul class="thumbnails">
 				<li ng-repeat="image in images" class="span2">
 					<div class="thumbnail">
 						<img src="http://localhost:8080/images/{{image.name}}" alt="">
 						<div class="caption">
-							<h5>{{image.name}}</h5>
-							<p>
-								{{image.snippet}}.
-							</p>
-							<p>
-								<a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a>
-							</p>
+							<a target="blank" href="http://localhost:8080/images/{{image.name}}">{{image.name}}</a>
 						</div>
 					</div>
 				</li>
 			</ul>
-			<div id="fileDropArea"> drop images here...</div>
+			
+			<div id="fileDropArea"> drop images here... {{images.length}}</div>
 
 		</div>
 
-		<div style="display:none" id="gameContainer" class="gameContainer">
+		<div ng-class="displayInRightPane('game')" id="gameContainer" class="gameContainer">
 			<div style="display: block" id="cr-stage">
 			</div>
 		</div>
@@ -92,7 +88,7 @@ Crafty.e("2D, DOM, Color, Fourway")
 		</div>
 
 	</div>
-
+	<!-- RIGHTPANE END -->
 
 
 
@@ -103,11 +99,6 @@ Crafty.e("2D, DOM, Color, Fourway")
 	<script src="lib/jquery/jquery-1.7.1.min.js"></script>
 	<script src="lib/underscore/underscore.js"></script>
 	<script src="lib/angular/angular.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/services.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/filters.js"></script>
-	<script src="js/directives.js"></script>
 	<script src="lib/jslint/jslint.js"></script>
 	<script src="lib/CodeMirror/lib/codemirror.js"></script>
 	<script src="lib/CodeMirror/mode/javascript/javascript.js"></script>
@@ -116,9 +107,17 @@ Crafty.e("2D, DOM, Color, Fourway")
 	<script src="lib/bootstrap/js/bootstrap.js"></script>
 	<script src="lib/crafty/crafty.js"></script>
 
+	<script src="js/app.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
 
-
-
+	<script src="js/controllers/AssetsCtrl.js"></script>
+	<script src="js/controllers/CodeEditorCtrl.js"></script>
+	<script src="js/controllers/ConsoleCtrl.js"></script>
+	<script src="js/controllers/MenuCtrl.js"></script>
+	<script src="js/controllers/RightPaneCtrl.js"></script>
+	
 
 	<script type="text/javascript">
 
