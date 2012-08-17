@@ -32,13 +32,20 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
     };
 
     $scope.saveToServer = function () {
-        console.log(343434);
 	    server.save();
     };
 
 	$scope.fork = function() {
 		server.fork();
 	};
+	
+	$scope.publish = function () {
+		server.publish();
+	};
+	
+	pubSub.sub('Server.Publish', function (id) {
+		window.open('?id=' + id + '&version=0', '_newtab');
+	});
 
     $scope.loadVersion = function (version) {
         getStateFromServer(versionManager.getId(), version);

@@ -128,7 +128,7 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 						onError.call();
 					} else {
 						versionManager.set(data.id, data.version);
-						pubSub.pub('Console.log', "Saved version " + data.version);
+						pubSub.pub('Console.log', "forked version " + data.version);
 						if (data.code) {
 							pubSub.pub('Server.code', data.code);
 						}
@@ -137,6 +137,31 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 						}
 						if (data.images) {
 							pubSub.pub('Server.images', data.images);
+						}
+						onSuccess.call(this);
+					}
+				}
+			});
+		},
+		publish: function (id, version, onSuccess, onError) {
+			if (!id) {
+				id = versionManager.getId();
+			}
+			if (!version) {
+				version = versionManager.getVersion();
+			}
+			$.ajax({
+				type: 'POST',
+				url: host + "/api/craft/" + id + "/publish/" + version,
+				data: {},
+				success: function (data) {
+					if (data.error) {
+						pubSub.pub('Console.log', "Problem publishing: " + data.error);
+						onError.call();
+					} else {
+						pubSub.pub('Console.log', "Published with new id " + data.id);
+						if (data.publishUrl) {
+							pubSub.pub('Server.Publish', data.id);
 						}
 						onSuccess.call(this);
 					}

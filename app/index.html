@@ -18,7 +18,7 @@
 				<a class="brand" href="/">CraftyBuilder</a>
 				<ul class="nav">
 					<li class="menu_item"><a ng-click="saveToServer();">Save</a> </li>
-					<li class="menu_item"><a ng-click="fork();">Fork</a> </li>
+					
 					<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">History
 							                     <b class="caret"></b></a>
 						<ul id="history-menu" class="dropdown-menu">
@@ -28,11 +28,41 @@
 						</ul>
 					</li>
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Templates
-							                     <b class="caret"></b></a>
+						                     <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li ng-repeat="template in templates"><a ng-click="loadTemplate(template.name);">{{template.name}}</a></li>
 						</ul>
 					</li>
+					<!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Settings
+						                         <b class="caret"></b></a>
+						    <ul class="dropdown-menu" style="width:250px;">
+							    <li class="nav-header">
+								    Compiler warnings
+							    </li>
+							    <li>
+								    <div class="btn-group">
+									    <button class="btn disabled btn-primary">
+										    JSLint</button>
+									    <button ng-click="" ng-class="activeButtonClass('game')" class="btn">
+										    warning</button>
+									    <button ng-click="" ng-class="activeButtonClass('resources')" class="btn">
+										    error</button>
+									    <button ng-click="" ng-class="activeButtonClass('resources')" class="btn">
+										    off</button>
+								    </div>
+								    <div class="btn-group">
+									    <button class="btn disabled btn-primary">
+										    Run game</button>
+									    <button ng-click="" ng-class="activeButtonClass('game')" class="btn">
+										    yes</button>
+									    <button ng-click="" ng-class="activeButtonClass('resources')" class="btn">
+										    no</button>
+								    </div>
+							    </li>
+						    </ul>
+					    </li>-->
+					<li class="menu_item"><a ng-click="fork();">Fork</a> </li>
+					<li class="menu_item"><a ng-click="publish();">Publish</a> </li>
 				</ul>
 				<div class="btn-group pull-right">
 					<button ng-click="rightPane('game')" ng-class="activeButtonClass('game')" class="btn">
