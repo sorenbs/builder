@@ -16,6 +16,12 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
         $scope.templates = data;
         $scope.$apply();
     });
+	
+    pubSub.sub('Server.readOnly', function (readOnly) {
+    	$scope.readOnly = readOnly;
+	    console.log("isReadOnly: " + $scope.readOnly);
+    	$scope.$apply();
+    });
 
     if (versionManager.getId()) {
         getStateFromServer(versionManager.getId(), versionManager.getVersion());
@@ -23,9 +29,12 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
     getTemplatesFromServer();
 
     $scope.loadTemplate = function (name) {
-        for(var template in $scope.templates) {
-            if($scope.templates[template].name == name) {
-                pubSub.pub('Server.code', $scope.templates[template].code);
+    	for (var template in $scope.templates) {
+    		var t = $scope.templates[template];
+    		if (t.name == name) {
+    			getStateFromServer(t.id, t.version);
+				versionManager.set(t.id, t.version);
+        		//pubSub.pub('Server.code', $scope.templates[template].code);
                 break;
             }
         }
@@ -67,6 +76,9 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
                     if (data.images) {
                     	pubSub.pub('Server.images', data.images);
                     }
+                    if (data.readOnly) {
+                    	pubSub.pub('Server.readOnly', data.readOnly);
+                    }
                 }
             },
             dataType: 'json'
@@ -95,5 +107,16 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
 	};
 	$scope.rightPane = function(btn) {
 		activeRightPane.set(btn);
+	};
+	$scope.readOnlyClass = function (displayIfReadOnly) {
+		console.log($scope.readOnly);
+
+		if (displayIfReadOnly && $scope.readOnly) {
+			return "";
+		}
+		if (!displayIfReadOnly && !$scope.readOnly) {
+			return "";
+		}
+		return "hidden";
 	};
 }

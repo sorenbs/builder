@@ -41,7 +41,7 @@ function AssetsCtrl($scope, pubSub, host, versionManager, server) {
 					pubSub.pub('Console.log', "Problem saving: " + data.error);
 				} else {
 					pubSub.pub('Console.log', "Saved image " + data.name);
-					$scope.images.push({ name: data.name, snippet: "Cool!" });
+					$scope.images.push(data);
 					$scope.$apply();
 				}
 			}

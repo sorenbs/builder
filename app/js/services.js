@@ -71,7 +71,7 @@ builderServices.factory('versionManager', function ($location, $rootScope) {
 		set: function (id, version) {
 			console.log(id + ' ' + version);
 			$location.search({ version: version, id: id });
-			$rootScope.$apply();
+			if (!$rootScope.$$phase) $rootScope.$digest();
 		}
 	};
 });
@@ -101,12 +101,16 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 				success: function (data) {
 					if (data.error) {
 						pubSub.pub('Console.log', "Problem saving: " + data.error);
-						onError.call();
+						if (onError) {
+							onError.call();
+						}
 					} else {
 						versionManager.set(data.id, data.version);
 						pubSub.pub('Console.log', "Saved version " + data.version);
 						pubSub.pub('Server.newHistoryItem', data.newVersion);
-						onSuccess.call(this);
+						if (onSuccess) {
+							onSuccess.call(this);
+						}
 					}
 				}
 			});
@@ -125,9 +129,13 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 				success: function (data) {
 					if (data.error) {
 						pubSub.pub('Console.log', "Problem forking: " + data.error);
-						onError.call();
+						if (onError) {
+							onError.call();
+						}
 					} else {
 						versionManager.set(data.id, data.version);
+						console.log('forkedddd');
+						console.log(data);
 						pubSub.pub('Console.log', "forked version " + data.version);
 						if (data.code) {
 							pubSub.pub('Server.code', data.code);
@@ -138,7 +146,10 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 						if (data.images) {
 							pubSub.pub('Server.images', data.images);
 						}
-						onSuccess.call(this);
+						pubSub.pub('Server.readOnly', data.readOnly);
+						if (onSuccess) {
+							onSuccess.call(this);
+						}
 					}
 				}
 			});
@@ -157,13 +168,17 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 				success: function (data) {
 					if (data.error) {
 						pubSub.pub('Console.log', "Problem publishing: " + data.error);
-						onError.call();
+						if(onError) {
+							onError.call();
+							}
 					} else {
 						pubSub.pub('Console.log', "Published with new id " + data.id);
-						if (data.publishUrl) {
+						if (data.id) {
 							pubSub.pub('Server.Publish', data.id);
 						}
-						onSuccess.call(this);
+						if (onSuccess) {
+							onSuccess.call(this);
+						}
 					}
 				}
 			});
