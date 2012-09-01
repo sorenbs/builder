@@ -1,6 +1,7 @@
 'use strict';
 function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightPane, server) {
-    $scope.versions = [];
+	$scope.versions = [];
+	$scope.versionManager = versionManager;
     pubSub.sub('Server.history', function (data) {
         console.log(data);
         $scope.versions = data;
@@ -53,7 +54,7 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
 	};
 	
 	pubSub.sub('Server.Publish', function (id) {
-		window.open('?id=' + id + '&version=0', '_newtab');
+		window.open('embed.html?id=' + id + '&version=0', '_newtab');
 	});
 
     $scope.loadVersion = function (version) {
