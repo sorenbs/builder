@@ -1,5 +1,8 @@
 'use strict';
-function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightPane, server) {
+function MenuCtrl($scope, pubSub, dataBridge, versionManager, dynamicHost, activeRightPane, server) {
+
+    console.log("HOST" + dynamicHost);
+
 	$scope.versions = [];
 	$scope.versionManager = versionManager;
     pubSub.sub('Server.history', function (data) {
@@ -63,7 +66,7 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
 
     function getStateFromServer(id, version) {
         $.ajax({
-            url: host + "/api/craft/" + id + "/code/" + version,
+            url: dynamicHost + "/api/craft/" + id + "/code/" + version,
             success: function (data) {
                 if (data.error) {
                     pubSub.pub('Console.log', "AWK!, " + data.error);
@@ -88,7 +91,7 @@ function MenuCtrl($scope, pubSub, dataBridge, versionManager, host, activeRightP
     
     function getTemplatesFromServer() {
         $.ajax({
-            url: host + "/api/templates",
+            url: dynamicHost + "/api/templates",
             success: function (data) {
                     if (data.templates) {
                         pubSub.pub('Server.templates', data.templates);

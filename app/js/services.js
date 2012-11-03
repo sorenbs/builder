@@ -8,7 +8,9 @@
 var builderServices = angular.module('builder.services', []);
 
 builderServices.value('version', '0.21');
-builderServices.value('host', 'http://127.0.0.1:8080');
+builderServices.value('host', 'http://www.craftybuilder.com');// 'http://127.0.0.1:8080');
+builderServices.value('staticHost', 'http://www.craftybuilder.com');// 'http://127.0.0.1:8080');
+builderServices.value('dynamicHost', 'http://www.craftybuilder.com:8080');// 'http://127.0.0.1:8080');
 
 // PubSub service
 builderServices.factory('pubSub', function () {
@@ -91,12 +93,12 @@ builderServices.factory('activeRightPane', function($location, $rootScope) {
 	};
 });
 
-builderServices.factory('server', function($location, $rootScope, versionManager, dataBridge, pubSub, host) {
+builderServices.factory('server', function ($location, $rootScope, versionManager, dataBridge, pubSub, dynamicHost) {
 	return {
 		save: function(onSuccess, onError) {
 			$.ajax({
 				type: 'POST',
-				url: host + "/api/craft/" + versionManager.getId() + "/code/" + versionManager.getVersion(),
+				url: dynamicHost + "/api/craft/" + versionManager.getId() + "/code/" + versionManager.getVersion(),
 				data: { code: dataBridge.retrieve('Editor.value') },
 				success: function (data) {
 					if (data.error) {
@@ -105,6 +107,8 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 							onError.call();
 						}
 					} else {
+					    console.log("lll");
+					    console.log(data);
 						versionManager.set(data.id, data.version);
 						pubSub.pub('Console.log', "Saved version " + data.version);
 						pubSub.pub('Server.newHistoryItem', data.newVersion);
@@ -124,7 +128,7 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 			}
 			$.ajax({
 				type: 'POST',
-				url: host + "/api/craft/" + id + "/fork/" + version,
+				url: dynamicHost + "/api/craft/" + id + "/fork/" + version,
 				data: { },
 				success: function (data) {
 					if (data.error) {
@@ -163,7 +167,7 @@ builderServices.factory('server', function($location, $rootScope, versionManager
 			}
 			$.ajax({
 				type: 'POST',
-				url: host + "/api/craft/" + id + "/publish/" + version,
+				url: dynamicHost + "/api/craft/" + id + "/publish/" + version,
 				data: {},
 				success: function (data) {
 					if (data.error) {
