@@ -20,9 +20,14 @@ filterModule.filter('humanDate', function() {
 
 filterModule.filter('shorten', function () {
     return function (input, length) {
+        if(typeof input === "undefined") {
+            return "";
+        }
+
         if(input.length < length) {
             return input;
         }
+        
         return input.substring(0, length - 3) + "...";
     };
 });
