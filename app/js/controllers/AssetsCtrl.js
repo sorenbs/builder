@@ -1,7 +1,7 @@
 'use strict';
 
 
-function AssetsCtrl($scope, pubSub, host, versionManager, server) {
+function AssetsCtrl($scope, pubSub, dynamicHost, versionManager, server) {
 
 	$scope.images = [];
 
@@ -32,9 +32,10 @@ function AssetsCtrl($scope, pubSub, host, versionManager, server) {
 		
 		$.ajax({
 			type: 'POST',
-			url: host + "/api/craft/" + versionManager.getId() + "/image/" + versionManager.getVersion(),
+			url: dynamicHost + "/api/craft/" + versionManager.getId() + "/image/" + versionManager.getVersion(),
 			data: fd,
 			contentType: false,
+			dataType: 'json',
 			processData: false,
 			success: function (data) {
 				if (data.error) {

@@ -31,3 +31,9 @@ filterModule.filter('shorten', function () {
         return input.substring(0, length - 3) + "...";
     };
 });
+
+filterModule.filter('imageLocation', function (imageHost) {
+    return function (imageName) {
+        return imageHost + imageName;
+    };
+});

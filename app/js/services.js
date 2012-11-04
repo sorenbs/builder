@@ -7,10 +7,9 @@
 // In this case it is a simple value service.
 var builderServices = angular.module('builder.services', []);
 
-builderServices.value('version', '0.21');
-builderServices.value('host', 'http://www.craftybuilder.com');// 'http://127.0.0.1:8080');
-builderServices.value('staticHost', 'file:///C:/crafty/builder/app/'); //'http://www.craftybuilder.com');// 'http://127.0.0.1:8080');
+builderServices.value('staticHost', 'file:///C:/crafty/builder/app/'); //'http://www.craftybuilder.com');
 builderServices.value('dynamicHost', 'http://www.craftybuilder.com:8080');// 'http://127.0.0.1:8080');
+builderServices.value('imageHost', 'http://www.craftybuilder.com');
 
 // PubSub service
 builderServices.factory('pubSub', function () {

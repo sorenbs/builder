@@ -1,9 +1,8 @@
 'use strict';
-function MenuCtrl($scope, pubSub, dataBridge, versionManager, dynamicHost, activeRightPane, server) {
+function MenuCtrl($scope, pubSub, dataBridge, versionManager, dynamicHost, activeRightPane, server, staticHost) {
 
-    console.log("HOST" + dynamicHost);
-
-	$scope.versions = [];
+    $scope.homeLocation = staticHost + 'index.html';
+    $scope.versions = [];
 	$scope.versionManager = versionManager;
     pubSub.sub('Server.history', function (data) {
         console.log(data);

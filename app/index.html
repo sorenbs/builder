@@ -15,7 +15,7 @@
 	<div class="navbar navbar-fixed-top" ng-controller="MenuCtrl">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="/">CraftyBuilder</a>
+				<a class="brand" href="{{homeLocation}}">CraftyBuilder</a>
 				<ul class="nav">
 					<li ng-class="readOnlyClass(false)" class="menu_item"><a ng-click="saveToServer();">Save</a> </li>
 					
@@ -111,9 +111,9 @@ Crafty.e("2D, DOM, Color, Fourway")
 			<ul class="thumbnails">
 				<li ng-repeat="image in images" class="span2">
 					<div class="thumbnail">
-						<img src="http://localhost:8080{{image.path}}" alt="">
+						<img src="{{image.path|imageLocation}}" alt="">
 						<div class="caption">
-							<a target="blank" href="http://localhost:8080/images/{{image.name}}">{{image.name}}</a>
+							<a target="blank" href="{{image.path|imageLocation}}">{{image.name}}</a>
 						</div>
 					</div>
 				</li>
