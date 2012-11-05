@@ -68,13 +68,13 @@
 						<ul class="dropdown-menu">
 							<li class="nav-header">iframe</li>
 							<li>
-								<textarea onclick="arguments[0].stopPropagation();" rows="4" class="input-xlarge" ><iframe src='www.craftybuilder.com/app/embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}' id='gameframe' height='300' width='600'>
-	Please go to www.craftybuilder.com/app/embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}
+								<textarea onclick="arguments[0].stopPropagation();" rows="4" class="input-xlarge" ><iframe src='{{staticHost}}embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}' id='gameframe' height='300' width='600'>
+	Please go to {{staticHost}}embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}
 </iframe></textarea>
 							</li>
 							<li class="nav-header">url</li>
 							<li>
-								<textarea onclick="arguments[0].stopPropagation();"  rows="2" class="input-xlarge" >/app/embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}</textarea>
+								<textarea onclick="arguments[0].stopPropagation();"  rows="2" class="input-xlarge" >{{staticHost}}embed.html?id={{versionManager.getId()}}&version={{versionManager.getVersion()}}</textarea>
 							</li>
 						</ul>
 					</li>

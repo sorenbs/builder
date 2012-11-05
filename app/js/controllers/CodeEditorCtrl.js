@@ -40,9 +40,10 @@ function CodeEditorController($scope, pubSub, dataBridge) {
             indentUnit: 4,
             indentWithTabs: true,
             extraKeys: { "Ctrl-Space": "autocomplete" },
-            lineWrapping: true,
-            onChange: processInput
+            lineWrapping: true
         });
+        codeMirrorInstance.on('change', processInput);
+
 	    processInput();
     }
 

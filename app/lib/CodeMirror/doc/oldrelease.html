@@ -1,20 +1,109 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <title>CodeMirror</title>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans:bold"/>
     <link rel="stylesheet" type="text/css" href="docs.css"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="alternate" href="http://twitter.com/statuses/user_timeline/242283288.rss" type="application/rss+xml"/>
   </head>
   <body>
 
 <h1><span class="logo-braces">{ }</span> <a href="http://codemirror.net/">CodeMirror</a></h1>
 
-<pre class="grey">
-<img src="baboon.png" class="logo" alt="logo"/>/* Old release history */
-
+<div class="grey">
+<img src="baboon.png" class="logo" alt="logo"/>
+<pre>
+/* Old release
+   history */
 </pre>
+</div>
+
+  <p class="rel">27-02-2012: <a href="http://codemirror.net/codemirror-2.22.zip">Version 2.22</a>:</p>
+
+  <ul class="rel-note">
+    <li>Allow <a href="manual.html#keymaps">key handlers</a> to pass up events, allow binding characters.</li>
+    <li>Add <a href="manual.html#option_autoClearEmptyLines"><code>autoClearEmptyLines</code></a> option.</li>
+    <li>Properly use tab stops when rendering tabs.</li>
+    <li>Make PHP mode more robust.</li>
+    <li>Support indentation blocks in <a href="manual.html#util_foldcode">code folder</a>.</li>
+    <li>Add a script for <a href="manual.html#util_match-highlighter">highlighting instances of the selection</a>.</li>
+    <li>New <a href="../mode/properties/index.html">.properties</a> mode.</li>
+    <li>Fix many bugs.</li>
+  </ul>
+
+  <p class="rel">27-01-2012: <a href="http://codemirror.net/codemirror-2.21.zip">Version 2.21</a>:</p>
+
+  <ul class="rel-note">
+    <li>Added <a href="../mode/less/index.html">LESS</a>, <a href="../mode/mysql/index.html">MySQL</a>,
+    <a href="../mode/go/index.html">Go</a>, and <a href="../mode/verilog/index.html">Verilog</a> modes.</li>
+    <li>Add <a href="manual.html#option_smartIndent"><code>smartIndent</code></a>
+    option.</li>
+    <li>Support a cursor in <a href="manual.html#option_readOnly"><code>readOnly</code></a>-mode.</li>
+    <li>Support assigning multiple styles to a token.</li>
+    <li>Use a new approach to drawing the selection.</li>
+    <li>Add <a href="manual.html#scrollTo"><code>scrollTo</code></a> method.</li>
+    <li>Allow undo/redo events to span non-adjacent lines.</li>
+    <li>Lots and lots of bugfixes.</li>
+  </ul>
+
+  <p class="rel">20-12-2011: <a href="http://codemirror.net/codemirror-2.2.zip">Version 2.2</a>:</p>
+
+  <ul class="rel-note">
+    <li>Slightly incompatible API changes. Read <a href="upgrade_v2.2.html">this</a>.</li>
+    <li>New approach
+    to <a href="manual.html#option_extraKeys">binding</a> keys,
+    support for <a href="manual.html#option_keyMap">custom
+    bindings</a>.</li>
+    <li>Support for overwrite (insert).</li>
+    <li><a href="manual.html#option_tabSize">Custom-width</a>
+    and <a href="../demo/visibletabs.html">stylable</a> tabs.</li>
+    <li>Moved more code into <a href="manual.html#addons">add-on scripts</a>.</li>
+    <li>Support for sane vertical cursor movement in wrapped lines.</li>
+    <li>More reliable handling of
+    editing <a href="manual.html#markText">marked text</a>.</li>
+    <li>Add minimal <a href="../demo/emacs.html">emacs</a>
+    and <a href="../demo/vim.html">vim</a> bindings.</li>
+    <li>Rename <code>coordsFromIndex</code>
+    to <a href="manual.html#posFromIndex"><code>posFromIndex</code></a>,
+    add <a href="manual.html#indexFromPos"><code>indexFromPos</code></a>
+    method.</li>
+  </ul>
+
+  <p class="rel">21-11-2011: <a href="http://codemirror.net/codemirror-2.18.zip">Version 2.18</a>:</p>
+  <p class="rel-note">Fixes <code>TextMarker.clear</code>, which is broken in 2.17.</p>
+
+  <p class="rel">21-11-2011: <a href="http://codemirror.net/codemirror-2.17.zip">Version 2.17</a>:</p>
+  <ul class="rel-note">
+    <li>Add support for <a href="manual.html#option_lineWrapping">line
+    wrapping</a> and <a href="manual.html#hideLine">code
+    folding</a>.</li>
+    <li>Add <a href="../mode/gfm/index.html">Github-style Markdown</a> mode.</li>
+    <li>Add <a href="../theme/monokai.css">Monokai</a>
+    and <a href="../theme/rubyblue.css">Rubyblue</a> themes.</li>
+    <li>Add <a href="manual.html#setBookmark"><code>setBookmark</code></a> method.</li>
+    <li>Move some of the demo code into reusable components
+    under <a href="../lib/util/"><code>lib/util</code></a>.</li>
+    <li>Make screen-coord-finding code faster and more reliable.</li>
+    <li>Fix drag-and-drop in Firefox.</li>
+    <li>Improve support for IME.</li>
+    <li>Speed up content rendering.</li>
+    <li>Fix browser's built-in search in Webkit.</li>
+    <li>Make double- and triple-click work in IE.</li>
+    <li>Various fixes to modes.</li>
+  </ul>
+
+  <p class="rel">27-10-2011: <a href="http://codemirror.net/codemirror-2.16.zip">Version 2.16</a>:</p>
+  <ul class="rel-note">
+    <li>Add <a href="../mode/perl/index.html">Perl</a>, <a href="../mode/rust/index.html">Rust</a>, <a href="../mode/tiddlywiki/index.html">TiddlyWiki</a>, and <a href="../mode/groovy/index.html">Groovy</a> modes.</li>
+    <li>Dragging text inside the editor now moves, rather than copies.</li>
+    <li>Add a <a href="manual.html#coordsFromIndex"><code>coordsFromIndex</code></a> method.</li>
+    <li><strong>API change</strong>: <code>setValue</code> now no longer clears history. Use <a href="manual.html#clearHistory"><code>clearHistory</code></a> for that.</li>
+    <li><strong>API change</strong>: <a href="manual.html#markText"><code>markText</code></a> now
+    returns an object with <code>clear</code> and <code>find</code>
+    methods. Marked text is now more robust when edited.</li>
+    <li>Fix editing code with tabs in Internet Explorer.</li>
+  </ul>
 
   <p class="rel">26-09-2011: <a href="http://codemirror.net/codemirror-2.15.zip">Version 2.15</a>:</p>
   <p class="rel-note">Fix bug that snuck into 2.14: Clicking the
@@ -119,7 +208,7 @@
     <li>Fix some issues with JavaScript indentation.</li>
   </ul>
 
-  <p class="rel">22-02-2011: <a href="https://github.com/marijnh/codemirror2/tree/beta2">Version 2.0 beta 2</a>:</p>
+  <p class="rel">22-02-2011: <a href="https://github.com/marijnh/codemirror/tree/beta2">Version 2.0 beta 2</a>:</p>
   <p class="rel-note">Somewhat more mature API, lots of bugs shaken out.</a>
 
   <p class="rel">17-02-2011: <a href="http://codemirror.net/codemirror-0.94.zip">Version 0.94</a>:</p>

@@ -2,6 +2,7 @@
 function MenuCtrl($scope, pubSub, dataBridge, versionManager, dynamicHost, activeRightPane, server, staticHost) {
 
     $scope.homeLocation = staticHost + 'index.html';
+    $scope.staticHost = staticHost;
     $scope.versions = [];
 	$scope.versionManager = versionManager;
     pubSub.sub('Server.history', function (data) {
